@@ -1,17 +1,73 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { addFlashcard } from '../store/actions/flashcardActions';
+
+import Flashcard from '../components/Flashcard';
 
 class Flashcards extends Component {
-  render() {
-    return (
-      <div className="Flashcards">
-        <h1>Flashcards</h1>
+  state = {
+    front: '',
+    back: ''
+  };
 
-        <input placeholder="Front" />
-        <input placeholder="Back" />
-        <button>Add Flashcard</button>
+  onInputChange = e => {
+    console.log(e.target.name);
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  addNewFlashcard = () => {
+    this.props.addFlashcard({
+      front: this.state.front,
+      back: this.state.back
+    });
+
+    this.setState({
+      front: '',
+      back: ''
+    });
+  };
+
+  render() {
+    const { flashcards } = this.props;
+    return (
+      <div className='Flashcards'>
+        <h1>Flashcards</h1>
+        New Card:
+        <input
+          placeholder='Front'
+          name='front'
+          value={this.state.front}
+          onChange={this.onInputChange}
+        />
+        <input
+          placeholder='Back'
+          name='back'
+          value={this.state.back}
+          onChange={this.onInputChange}
+        />
+        <button
+          disabled={!this.state.front || !this.state.back}
+          onClick={this.addNewFlashcard}
+        >
+          Add
+        </button>
+        <div className='Flashcards__container'>
+          {flashcards.map(flashcard => (
+            <Flashcard front={flashcard.front} back={flashcard.back} />
+          ))}
+        </div>
       </div>
     );
   }
 }
 
-export default Flashcards;
+const mapStateToProps = state => {
+  return {
+    flashcards: state.Flashcards.flashcards
+  };
+};
+
+export default connect(mapStateToProps, { addFlashcard })(Flashcards);

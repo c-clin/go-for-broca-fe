@@ -1,0 +1,27 @@
+.Header {
+  background: dodgerblue;
+
+  &__nav {
+    ul {
+      list-style: none;
+      display: flex;
+    }
+
+    &--list-item {
+      margin: 15px;
+
+      &:last-of-type {
+        margin-left: auto;
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff;
+
+        &:hover {
+          color: lightsalmon;
+        }
+      }
+    }
+  }
+}

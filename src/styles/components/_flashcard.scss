@@ -1,0 +1,25 @@
+.Flashcard {
+  background-color: lavenderblush;
+  width: 300px;
+  height: 150px;
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    h3 {
+      font-weight: 400;
+    }
+  }
+
+  &__cta {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+}

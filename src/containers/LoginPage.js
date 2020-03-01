@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 
+import { GoogleLogin } from 'react-google-login';
+
 class LoginPage extends Component {
-  onSignIn = googleUser => {
-    let id_token = googleUser.getAuthResponse().id_token;
-    console.log(googleUser);
+  responseGoogle = response => {
+    console.log('res--- ', response);
   };
+
   render() {
     return (
       <div className='LoginPage'>
-        <div class='g-signin2' data-onsuccess={this.onSignIn}></div>
+        <GoogleLogin
+          clientId='286378358546-r44p77q6cghvaeddv5713srdf539gjaq.apps.googleusercontent.com'
+          buttonText='Login'
+          onSuccess={this.responseGoogle}
+          onFailure={this.responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
       </div>
     );
   }

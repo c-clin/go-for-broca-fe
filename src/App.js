@@ -10,13 +10,13 @@ import Flashcards from './containers/Flashcards';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <BrowserRouter>
           <Header />
-          <Route path="/login" exact component={LoginPage} />
-          <Route path="/" exact component={Landing} />
-          <Route path="/review" exact component={Review} />
-          <Route path="/flashcards" exact component={Flashcards} />
+          <Route path='/login' exact component={LoginPage} />
+          <Route path='/' exact component={Landing} />
+          <Route path='/review' exact component={Review} />
+          <Route path='/flashcards' exact component={Flashcards} />
         </BrowserRouter>
       </div>
     );

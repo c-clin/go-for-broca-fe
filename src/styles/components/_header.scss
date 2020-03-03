@@ -5,6 +5,7 @@
     ul {
       list-style: none;
       display: flex;
+      margin: 0;
     }
 
     &--list-item {
@@ -19,7 +20,7 @@
         color: #fff;
 
         &:hover {
-          color: lightsalmon;
+          text-decoration: underline;
         }
       }
     }

@@ -35,26 +35,35 @@ class Flashcards extends Component {
     return (
       <div className='Flashcards'>
         <h1 className='heading-1'>Flashcards</h1>
-        New Card:
-        <input
-          placeholder='Front'
-          name='front'
-          value={this.state.front}
-          onChange={this.onInputChange}
-        />
-        <input
-          placeholder='Back'
-          name='back'
-          value={this.state.back}
-          onChange={this.onInputChange}
-        />
-        <button
-          disabled={!this.state.front || !this.state.back}
-          onClick={this.addNewFlashcard}
-        >
-          Add
-        </button>
+
         <div className='Flashcards__container'>
+          <div className='Flashcards__new'>
+            <div className='Flashcards__new--container'>
+              New Card:
+              <div>
+                <input
+                  placeholder='Front'
+                  name='front'
+                  value={this.state.front}
+                  onChange={this.onInputChange}
+                />
+              </div>
+              <div>
+                <input
+                  placeholder='Back'
+                  name='back'
+                  value={this.state.back}
+                  onChange={this.onInputChange}
+                />
+              </div>
+              <button
+                disabled={!this.state.front || !this.state.back}
+                onClick={this.addNewFlashcard}
+              >
+                Add
+              </button>
+            </div>
+          </div>
           {flashcards.map(flashcard => (
             <Flashcard front={flashcard.front} back={flashcard.back} />
           ))}

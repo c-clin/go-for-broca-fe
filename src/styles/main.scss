@@ -6,16 +6,30 @@
 // @import 'libs/grid';@import 'components/header';
 @import 'components/flashcard';
 @import 'components/header';
+@import 'components/toaster';
 
 @import 'containers/decks';
+@import 'containers/flashcards';
 
 // base
 * {
   font-family: 'Roboto';
 }
 
+body {
+  margin: 0;
+}
+
 .heading-1 {
   color: #6f6f6f;
   font-size: 24px;
   font-weight: 500;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.page-content {
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px 0;
 }

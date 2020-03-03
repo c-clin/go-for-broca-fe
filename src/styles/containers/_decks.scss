@@ -2,11 +2,11 @@
   &__item {
     border: 1px solid gray;
     height: 50px;
-    margin: 10px;
+    margin-bottom: 10px;
     padding: 10px;
     border-radius: 3px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+    // cursor: pointer;
 
     &:hover {
       transition: box-shadow linear 0.3s;

@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import axiosAPI from './axios-api';
+
 import LoginPage from './containers/LoginPage';
 import Header from './components/Header';
 import Landing from './containers/Landing';
 import Review from './containers/Review';
 import Flashcards from './containers/Flashcards';
 import Decks from './containers/Decks';
+
+if (localStorage.token) {
+  const token = localStorage.getItem('token');
+  axiosAPI.defaults.headers.common['Authorization'] = `bearer ${token}`;
+}
 
 class App extends Component {
   render() {

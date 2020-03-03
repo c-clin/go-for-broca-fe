@@ -11,10 +11,17 @@ class LoginPage extends Component {
     this.props.history.push('/decks');
   };
 
-  onLoginFailure = res => console.log(res);
+  onLoginFailure = res => {
+    localStorage.removeItem('token');
+    console.log(res);
+  };
 
   onLoggingOut = () => {
     localStorage.removeItem('token');
+  };
+
+  isSignedIn = val => {
+    console.log(val);
   };
 
   render() {
@@ -26,6 +33,7 @@ class LoginPage extends Component {
           onSuccess={this.onLoginSuccess}
           onFailure={this.onLoginFailure}
           cookiePolicy={'single_host_origin'}
+          isSignedIn={this.isSignedIn}
         />
 
         <GoogleLogout

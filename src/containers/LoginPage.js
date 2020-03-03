@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
 
 class LoginPage extends Component {
-  responseGoogle = response => {
-    console.log('res--- ', response);
+  responseGoogle = res => {
+    console.log('res--- ', res);
+    localStorage.setItem('token', res.tokenId);
+    this.props.history.push('/decks');
   };
 
   render() {

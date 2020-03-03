@@ -11,13 +11,16 @@ class Header extends Component {
               <Link to='/'>Home</Link>
             </li>
             <li className='Header__nav--list-item'>
-              <Link to='/review'>Review</Link>
-            </li>
-            <li className='Header__nav--list-item'>
               <Link to='/flashcards'>Flashcards</Link>
             </li>
             <li className='Header__nav--list-item'>
-              <a href='#'>Logout</a>
+              <Link to='/review'>Review</Link>
+            </li>
+            <li className='Header__nav--list-item'>
+              <Link to='/decks'>Decks</Link>
+            </li>
+            <li className='Header__nav--list-item'>
+              <Link to='/login'>Log In</Link>
             </li>
           </ul>
         </nav>

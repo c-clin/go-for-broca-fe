@@ -34,7 +34,7 @@ class Flashcards extends Component {
     const { flashcards } = this.props;
     return (
       <div className='Flashcards'>
-        <h1>Flashcards</h1>
+        <h1 className='heading-1'>Flashcards</h1>
         New Card:
         <input
           placeholder='Front'

@@ -7,6 +7,15 @@
 @import 'components/flashcard';
 @import 'components/header';
 
+@import 'containers/decks';
+
+// base
 * {
   font-family: 'Roboto';
+}
+
+.heading-1 {
+  color: #6f6f6f;
+  font-size: 24px;
+  font-weight: 500;
 }

@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Landing from './containers/Landing';
 import Review from './containers/Review';
 import Flashcards from './containers/Flashcards';
+import Decks from './containers/Decks';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path='/' exact component={Landing} />
           <Route path='/review' exact component={Review} />
           <Route path='/flashcards' exact component={Flashcards} />
+          <Route path='/decks' exact component={Decks} />
         </BrowserRouter>
       </div>
     );

@@ -1,0 +1,33 @@
+.Toaster {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  padding-top: 15px;
+  top: 0;
+  z-index: 100;
+
+  opacity: 1;
+  animation: fadeIn ease-in-out 1;
+  animation-duration: 0.15s;
+
+  &__container {
+    padding: 8px;
+    border: 1px solid;
+    border-radius: 4px;
+    background: white;
+    position: relative;
+    z-index: 100;
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

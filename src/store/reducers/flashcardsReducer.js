@@ -10,7 +10,8 @@ const initState = {
       front: 'Padre',
       back: 'Father'
     }
-  ]
+  ],
+  review: {}
 };
 
 export default function(state = initState, action) {

@@ -1,11 +1,9 @@
 import axios from 'axios';
-
-let token = localStorage.getItem('token');
+import keys from './config/keys';
 
 const authInstance = axios.create({
-  baseURL: `http://localhost:5000/api`,
+  baseURL: `https://goforbroca.herokuapp.com//api`,
   headers: {
-    Authorization: `bearer ${token}`,
     accept: 'application/json'
   }
 });

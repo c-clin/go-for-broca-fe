@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import keys from '../config/keys';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import axiosAPI from '../axios-api';
 

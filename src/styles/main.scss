@@ -1,12 +1,7 @@
-// @import 'libs/vars';
-// @import 'libs/functions';
-// @import 'libs/mixins';
-// @import 'libs/vendor';
-// @import 'libs/breakpoints';
-// @import 'libs/grid';@import 'components/header';
 @import 'components/flashcard';
 @import 'components/header';
 @import 'components/toaster';
+@import 'components/loader';
 
 @import 'containers/decks';
 @import 'containers/flashcards';

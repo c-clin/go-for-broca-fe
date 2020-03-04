@@ -4,7 +4,7 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <h1>Landing</h1>
+        <h1 className='heading-1'>Landing</h1>
       </div>
     );
   }

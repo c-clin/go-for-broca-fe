@@ -4,7 +4,7 @@ class Review extends Component {
   render() {
     return (
       <div>
-        <h1>Review</h1>
+        <h1 className='heading-1'>Review</h1>
       </div>
     );
   }

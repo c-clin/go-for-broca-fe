@@ -1,4 +1,10 @@
 import axiosAPI from '../../axios-api';
+import { showToaster } from './uiActions';
+
+import {
+  TOASTER_TYPE_SUCCESS,
+  TOASTER_TYPE_ERROR
+} from '../../components/Toaster';
 
 export const FETCH_ALL_DECKS_SUCCESS = 'FETCH_ALL_DECKS_SUCCESS';
 export const FETCH_USER_DECKS_SUCCESS = 'FETCH_USER_DECKS_SUCCESS';
@@ -12,7 +18,11 @@ export const fetchAllDecks = () => dispatch => {
         payload: res.data.decks
       });
     })
-    .catch(e => console.log(e));
+    .catch(e => {
+      dispatch(
+        showToaster({ type: TOASTER_TYPE_ERROR, content: e.response.data.msg })
+      );
+    });
 };
 
 export const fetchUserDecks = () => dispatch => {
@@ -24,11 +34,20 @@ export const fetchUserDecks = () => dispatch => {
         payload: res.data.decks
       });
     })
-    .catch(e => console.log(e));
+    .catch(e => {
+      dispatch(
+        showToaster({ type: TOASTER_TYPE_ERROR, content: e.response.data.msg })
+      );
+    });
 };
 
 export const forkStandardDeck = id => dispatch => {
   axiosAPI.post(`/decks/standard/${id}/fork/`).then(res => {
-    console.log(res);
+    dispatch(
+      showToaster({
+        type: TOASTER_TYPE_SUCCESS,
+        content: 'Successfully forked deck'
+      })
+    );
   });
 };

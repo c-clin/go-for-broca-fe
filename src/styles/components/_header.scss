@@ -2,15 +2,27 @@
   background: dodgerblue;
 
   &__nav {
+    height: 60px;
+
     ul {
       list-style: none;
       display: flex;
       margin: 0;
       padding: 0;
+      height: 100%;
     }
 
     &--list-item {
       margin: 15px;
+      display: flex;
+      align-items: center;
+
+      &.logo {
+        a {
+          font-family: 'Pacifico', cursive;
+          font-size: 25px;
+        }
+      }
 
       &:last-of-type {
         margin-left: auto;
@@ -21,7 +33,6 @@
         color: #fff;
 
         &:hover {
-          text-decoration: underline;
         }
       }
     }

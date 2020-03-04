@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 
 class Header extends Component {
   render() {
     const authLinks = [
-      { url: '/', title: 'Go For Broca' },
+      { url: '/', title: 'GoForBroca', logo: true },
       {
         url: '/decks',
         title: 'Decks'
@@ -26,7 +27,8 @@ class Header extends Component {
     const publicLinks = [
       {
         url: '/',
-        title: 'Go For Broca'
+        title: 'Go For Broca',
+        logo: true
       },
       {
         url: '/login',
@@ -41,7 +43,11 @@ class Header extends Component {
           <ul>
             {headerLinks.map(link => {
               return (
-                <li className='Header__nav--list-item'>
+                <li
+                  className={classnames('Header__nav--list-item', {
+                    logo: link.logo
+                  })}
+                >
                   <Link to={link.url}>{link.title}</Link>
                 </li>
               );

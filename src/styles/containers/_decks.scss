@@ -1,16 +1,53 @@
 .Decks {
   &__item {
-    border: 1px solid gray;
     height: 50px;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 3px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-    // cursor: pointer;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+
+    &.added {
+      border: 2px solid #00cb00;
+      cursor: auto;
+
+      &::after {
+      }
+    }
 
     &:hover {
       transition: box-shadow linear 0.3s;
-      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  &__cta-container {
+    margin: 20px;
+
+    button {
+      border: 1px solid dodgerblue;
+      color: dodgerblue;
+      padding: 9px 15px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 14px;
+
+      &:focus {
+        outline: none;
+      }
+
+      &.selected {
+        background-color: dodgerblue;
+        color: white;
+        cursor: auto;
+      }
+    }
+
+    &--standard {
+      margin-right: 5px;
+    }
+
+    &--user {
     }
   }
 }

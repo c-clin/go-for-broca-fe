@@ -12,6 +12,7 @@ import Review from './containers/Review';
 import Flashcards from './containers/Flashcards';
 import Decks from './containers/Decks';
 import Loader from './components/Loader';
+import Toaster from './components/Toaster';
 
 if (localStorage.token) {
   const token = localStorage.getItem('token');
@@ -72,6 +73,7 @@ class App extends Component {
           {this.props.isLoading && <Loader />}
 
           <div style={{ display: this.props.isLoading ? 'none' : 'block' }}>
+            <Toaster {...this.props.toaster} />
             <Header isSignedIn={this.props.isSignedIn} />
             {/* [TODO]: move all login logic to App */}
             <Route
@@ -106,7 +108,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isSignedIn: state.Auth.isSignedIn,
-    isLoading: state.Auth.isLoading
+    isLoading: state.Auth.isLoading,
+    toaster: state.UI.toaster
   };
 };
 

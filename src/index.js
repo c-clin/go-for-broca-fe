@@ -8,6 +8,8 @@ import App from './App';
 import './styles/main.scss';
 import registerServiceWorker from './registerServiceWorker';
 
+import './styles/main.scss';
+
 const composedEnhancers =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -9,7 +9,7 @@ export const showToaster = payload => dispatch => {
 
   setTimeout(() => {
     dispatch(removeToaster());
-  }, 3000);
+  }, 2000);
 };
 
 export const removeToaster = () => {

@@ -19,9 +19,14 @@ export const fetchAllDecks = () => dispatch => {
       });
     })
     .catch(e => {
-      dispatch(
-        showToaster({ type: TOASTER_TYPE_ERROR, content: e.response.data.msg })
-      );
+      if (e.response) {
+        dispatch(
+          showToaster({
+            type: TOASTER_TYPE_ERROR,
+            content: e.response.data.msg
+          })
+        );
+      }
     });
 };
 
@@ -35,9 +40,14 @@ export const fetchUserDecks = () => dispatch => {
       });
     })
     .catch(e => {
-      dispatch(
-        showToaster({ type: TOASTER_TYPE_ERROR, content: e.response.data.msg })
-      );
+      if (e.response) {
+        dispatch(
+          showToaster({
+            type: TOASTER_TYPE_ERROR,
+            content: e.response.data.msg
+          })
+        );
+      }
     });
 };
 

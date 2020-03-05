@@ -76,28 +76,30 @@ class App extends Component {
             <Toaster {...this.props.toaster} />
             <Header isSignedIn={this.props.isSignedIn} />
             {/* [TODO]: move all login logic to App */}
-            <Route
-              path='/'
-              exact
-              render={props => this.authCheck(Landing, props)}
-            />
-            <Route path='/login' exact component={LoginPage} />
+            <div className='app-layout'>
+              <Route
+                path='/'
+                exact
+                render={props => this.authCheck(Landing, props)}
+              />
+              <Route path='/login' exact component={LoginPage} />
 
-            <Route
-              path='/review'
-              exact
-              render={props => this.authCheck(Review, props)}
-            />
-            <Route
-              path='/decks'
-              exact
-              render={props => this.authCheck(Decks, props)}
-            />
-            <Route
-              path='/flashcards'
-              exact
-              render={props => this.authCheck(Flashcards, props)}
-            />
+              <Route
+                path='/review'
+                exact
+                render={props => this.authCheck(Review, props)}
+              />
+              <Route
+                path='/decks'
+                exact
+                render={props => this.authCheck(Decks, props)}
+              />
+              <Route
+                path='/flashcards'
+                exact
+                render={props => this.authCheck(Flashcards, props)}
+              />
+            </div>
           </div>
         </BrowserRouter>
       </div>

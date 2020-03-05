@@ -8,7 +8,7 @@
   z-index: 100;
   padding: 8px;
   z-index: 100;
-  height: 40px;
+  height: 35px;
   transform: translateY(-100%);
   transition: transform 0.3s linear;
 
@@ -18,12 +18,12 @@
   }
 
   &__success {
-    background-color: #00d200;
+    background-color: #4fe84f;
     color: white;
   }
 
   &__error {
-    background-color: red;
+    background-color: #e42626;
     color: white;
   }
 }

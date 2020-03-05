@@ -1,11 +1,21 @@
 .Decks {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   &__item {
-    height: 50px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 3px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.25);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
 
     &.added {
       border: 2px solid #00cb00;

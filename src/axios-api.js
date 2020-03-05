@@ -1,7 +1,8 @@
 import axios from 'axios';
+import keys from './config/keys';
 
 const authInstance = axios.create({
-  baseURL: `https://goforbroca-backend.herokuapp.com/api`,
+  baseURL: `${keys.HOST}/api`,
   headers: {
     accept: 'application/json'
   }

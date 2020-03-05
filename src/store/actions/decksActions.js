@@ -59,5 +59,7 @@ export const forkStandardDeck = id => dispatch => {
         content: 'Successfully forked deck'
       })
     );
+
+    dispatch(fetchUserDecks());
   });
 };

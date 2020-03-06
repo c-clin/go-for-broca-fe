@@ -1,2 +1,2 @@
-release: npm install
-web: npm run deploy
+release: npm install && npm run build
+web: npm run serve

@@ -1,5 +1,5 @@
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./prod');
-} else {
-  module.exports = require('./dev');
-}
+module.exports = {
+  GOOGLE_CLIENT_ID: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.REACT_APP_GOOGLE_CLIENT_SECRET,
+  BACKEND_HOST: process.env.REACT_APP_BACKEND_HOST
+};

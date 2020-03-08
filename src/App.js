@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import axiosAPI from './axios-api';
 import { setIsSignedIn, startAuthLoading } from './store/actions/authActions';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import keys from './config/keys';
 
 import LoginPage from './containers/LoginPage';
 import Header from './components/Header';
@@ -29,6 +31,16 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    window.gapi.load('auth2', () => {
+      this.auth2 = window.gapi.auth2
+        .init({
+          client_id: `${keys.GOOGLE_CLIENT_ID}`
+        })
+        .then(res => {
+          console.log('res', res);
+        });
+    });
+
     if (this.props.isSignedIn === null) {
       this.props.startAuthLoading();
       this.googleLoadTimer = setInterval(this.checkGoogleLoader, 90);
@@ -67,6 +79,15 @@ class App extends Component {
     clearInterval(this.googleLoadTimer);
   };
 
+  onLogin = () => {};
+
+  onLogout = () => {
+    var auth2 = window.gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+      console.log('User signed out.');
+    });
+  };
+
   render() {
     return (
       <div className='App'>
@@ -75,7 +96,11 @@ class App extends Component {
 
           <div style={{ display: this.props.isLoading ? 'none' : 'block' }}>
             <Toaster {...this.props.toaster} />
-            <Header isSignedIn={this.props.isSignedIn} />
+            <Header
+              login={this.onLogin}
+              logout={this.onLogout}
+              isSignedIn={this.props.isSignedIn}
+            />
             {/* [TODO]: move all login logic to App */}
             <div className='app-layout'>
               <Route
@@ -83,7 +108,7 @@ class App extends Component {
                 exact
                 render={props => this.authCheck(Landing, props)}
               />
-              <Route path='/login' exact component={LoginPage} />
+              {/* <Route path='/login' exact component={LoginPage} /> */}
               <Route
                 path='/review'
                 exact

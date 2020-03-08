@@ -24,7 +24,8 @@ class Header extends Component {
       },
       {
         url: '/login',
-        title: 'Logout'
+        title: 'Logout',
+        onclick: this.props.logout
       }
     ];
 
@@ -36,7 +37,8 @@ class Header extends Component {
       },
       {
         url: '/login',
-        title: 'Login'
+        title: 'Login',
+        onclick: this.props.login
       }
     ];
 
@@ -46,16 +48,28 @@ class Header extends Component {
         <nav className='Header__nav'>
           <ul>
             {headerLinks.map((link, i) => {
-              return (
-                <li
-                  key={i}
-                  className={classnames('Header__nav--list-item', {
-                    logo: link.logo
-                  })}
-                >
-                  <Link to={link.url}>{link.title}</Link>
-                </li>
-              );
+              if (link.onclick) {
+                return (
+                  <li
+                    key={i}
+                    className='Header__nav--list-item'
+                    onClick={link.onclick}
+                  >
+                    {link.title}
+                  </li>
+                );
+              } else {
+                return (
+                  <li
+                    key={i}
+                    className={classnames('Header__nav--list-item', {
+                      logo: link.logo
+                    })}
+                  >
+                    <Link to={link.url}>{link.title}</Link>
+                  </li>
+                );
+              }
             })}
           </ul>
         </nav>

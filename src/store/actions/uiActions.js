@@ -6,10 +6,6 @@ export const showToaster = payload => dispatch => {
     type: SHOW_TOASTER,
     payload
   });
-
-  setTimeout(() => {
-    dispatch(removeToaster());
-  }, 2000);
 };
 
 export const removeToaster = () => {

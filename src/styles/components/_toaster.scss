@@ -12,10 +12,9 @@
   transform: translateY(-100%);
   transition: transform 0.3s linear;
 
-  &__open {
-    transform: translateY(0);
-    transition: transform 0.3s linear;
-  }
+  animation-name: slideIn;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 
   &__success {
     background-color: #4fe84f;
@@ -25,5 +24,17 @@
   &__error {
     background-color: #e42626;
     color: white;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(-100%);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
   }
 }

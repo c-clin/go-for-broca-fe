@@ -74,7 +74,7 @@ class App extends Component {
           {this.props.isLoading && <Loader />}
 
           <div style={{ display: this.props.isLoading ? 'none' : 'block' }}>
-            <Toaster {...this.props.toaster} />
+            <Toaster toaster={this.props.toaster} />
             <Header isSignedIn={this.props.isSignedIn} />
             {/* [TODO]: move all login logic to App */}
             <div className='app-layout'>

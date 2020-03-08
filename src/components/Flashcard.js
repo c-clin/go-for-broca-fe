@@ -36,11 +36,11 @@ class Flashcard extends Component {
   };
 
   render() {
-    const { front, back } = this.props;
+    const { front, back, className } = this.props;
 
     if (this.state.editing) {
       return (
-        <div className='Flashcard'>
+        <div className={classnames('Flashcard', className)}>
           <div className='Flashcard__content'>
             <div>
               <input
@@ -66,7 +66,7 @@ class Flashcard extends Component {
     } else {
       return (
         <div
-          className={classnames('Flashcard', {
+          className={classnames('Flashcard', className, {
             Flashcard__front: this.state.front
           })}
           onClick={this.onFlipCard}

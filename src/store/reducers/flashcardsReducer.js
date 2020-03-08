@@ -1,4 +1,9 @@
-import { ADD_FLASHCARD } from '../actions/flashcardActions';
+import {
+  ADD_FLASHCARD,
+  GET_LEARN_FLASHCARD_SUCCESS,
+  GET_REVIEW_FLASHCARD_SUCCESS,
+  START_FLASHCARD_LOADER
+} from '../actions/flashcardActions';
 
 const initState = {
   flashcards: [
@@ -12,7 +17,8 @@ const initState = {
     }
   ],
   learnCard: null,
-  reviewCard: null
+  reviewCard: null,
+  loading: false
 };
 
 export default function(state = initState, action) {
@@ -24,6 +30,18 @@ export default function(state = initState, action) {
       return {
         ...state,
         flashcards
+      };
+
+    case GET_LEARN_FLASHCARD_SUCCESS:
+      return {
+        ...state,
+        learnCard: action.payload,
+        loading: false
+      };
+    case START_FLASHCARD_LOADER:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;

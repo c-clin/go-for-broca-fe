@@ -67,7 +67,6 @@ class App extends Component {
   };
 
   render() {
-    console.log('ENV -- ', process.env);
     return (
       <div className='App'>
         <BrowserRouter>

@@ -27,7 +27,6 @@ class LoginPage extends Component {
   render() {
     const { isSignedIn } = this.props;
 
-    console.log('K ----- ', keys);
     return (
       <div className='LoginPage'>
         {isSignedIn ? (

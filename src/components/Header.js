@@ -15,6 +15,10 @@ class Header extends Component {
         title: 'Review'
       },
       {
+        url: '/learn',
+        title: 'Learn'
+      },
+      {
         url: '/flashcards',
         title: 'Flashcards'
       },
@@ -41,9 +45,10 @@ class Header extends Component {
       <div className='Header'>
         <nav className='Header__nav'>
           <ul>
-            {headerLinks.map(link => {
+            {headerLinks.map((link, i) => {
               return (
                 <li
+                  key={i}
                   className={classnames('Header__nav--list-item', {
                     logo: link.logo
                   })}

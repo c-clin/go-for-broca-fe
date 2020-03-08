@@ -78,16 +78,18 @@ class Decks extends Component {
           <React.Fragment>
             <h1 className='heading-1'>User Decks</h1>
             <div className='page-content'>
-              {userDecks.length === 0 && (
-                <p className='text-center'>Your user deck is empty!</p>
-              )}
-              {userDecks.map(deck => {
-                return (
-                  <div key={deck.id} className='Decks__item'>
-                    {deck.name}
-                  </div>
-                );
-              })}
+              <div className='Decks__container'>
+                {userDecks.length === 0 && (
+                  <p className='text-center'>Your user deck is empty!</p>
+                )}
+                {userDecks.map(deck => {
+                  return (
+                    <div key={deck.id} className='Decks__item'>
+                      {deck.name}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </React.Fragment>
         )}

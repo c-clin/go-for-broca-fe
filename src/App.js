@@ -9,6 +9,7 @@ import LoginPage from './containers/LoginPage';
 import Header from './components/Header';
 import Landing from './containers/Landing';
 import Review from './containers/Review';
+import Learn from './containers/Learn';
 import Flashcards from './containers/Flashcards';
 import Decks from './containers/Decks';
 import Loader from './components/Loader';
@@ -83,11 +84,15 @@ class App extends Component {
                 render={props => this.authCheck(Landing, props)}
               />
               <Route path='/login' exact component={LoginPage} />
-
               <Route
                 path='/review'
                 exact
                 render={props => this.authCheck(Review, props)}
+              />
+              <Route
+                path='/learn'
+                exact
+                render={props => this.authCheck(Learn, props)}
               />
               <Route
                 path='/decks'

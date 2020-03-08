@@ -8,6 +8,7 @@ import {
 
 export const FETCH_ALL_DECKS_SUCCESS = 'FETCH_ALL_DECKS_SUCCESS';
 export const FETCH_USER_DECKS_SUCCESS = 'FETCH_USER_DECKS_SUCCESS';
+export const DELETE_USER_DECK_SUCCESS = 'DELETE_USER_DECK_SUCCESS';
 
 export const fetchAllDecks = () => dispatch => {
   axiosAPI
@@ -49,6 +50,12 @@ export const fetchUserDecks = () => dispatch => {
         );
       }
     });
+};
+
+export const deleteUserDeck = id => dispatch => {
+  axiosAPI.delete(`/decks/user/${id}`).then(res => {
+    console.log('res', res);
+  });
 };
 
 export const forkStandardDeck = id => dispatch => {

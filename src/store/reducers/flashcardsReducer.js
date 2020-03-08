@@ -11,7 +11,8 @@ const initState = {
       back: 'Father'
     }
   ],
-  review: {}
+  learnCard: null,
+  reviewCard: null
 };
 
 export default function(state = initState, action) {

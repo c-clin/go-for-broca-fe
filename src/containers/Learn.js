@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getLearnFlashcard } from '../store/actions/flashcardActions';
 
 class Learn extends Component {
+  componentDidMount = () => {
+    this.onNext();
+  };
+
+  onNext = () => {
+    this.props.getLearnFlashcard();
+  };
+
   render() {
     return (
       <div className='Learn'>
-        <div className='heading-1'>Learn</div>
+        <h1 className='heading-1'>Learn</h1>
       </div>
     );
   }
 }
 
-export default Learn;
+const mapStateToProps = state => {};
+
+export default connect(null, { getLearnFlashcard })(Learn);

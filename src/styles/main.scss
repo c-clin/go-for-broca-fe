@@ -4,6 +4,7 @@
 @import 'components/header';
 @import 'components/toaster';
 @import 'components/loader';
+@import 'components/button';
 
 @import 'containers/decks';
 @import 'containers/flashcards';
@@ -38,4 +39,8 @@ h1.heading-1 {
 
 .text-center {
   text-align: center;
+}
+
+.block-center {
+  margin: 0 auto;
 }

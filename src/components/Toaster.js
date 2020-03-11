@@ -23,11 +23,8 @@ class Toaster extends Component {
 
     if (this.props.toaster.length === 0 && this.toasterInterval !== 0) {
       clearInterval(this.toasterInterval);
+      this.toasterInterval = 0;
     }
-  };
-
-  componentWillUnmount = () => {
-    clearInterval(this.toasterInterval);
   };
 
   render() {

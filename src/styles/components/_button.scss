@@ -1,0 +1,61 @@
+.Button {
+  text-decoration: none;
+  padding: 11px 22px;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.25s ease-in-out;
+  margin: 4px 0px;
+  color: #fff;
+  text-transform: uppercase;
+  border: 3px solid transparent;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &__black {
+    background-color: #545454;
+
+    &:hover {
+      background-color: #545454;
+    }
+  }
+
+  &__blue {
+    background-color: dodgerblue;
+
+    &:hover {
+      background-color: dodgerblues;
+    }
+  }
+
+  &__white {
+    background-color: gray;
+    border: 3px solid transparent;
+    // border: 2px solid $black;
+    color: #000;
+  }
+
+  &--autoWidth {
+    width: auto;
+  }
+
+  &--rounded {
+    border-radius: 100px;
+  }
+
+  &--loading {
+    cursor: wait;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

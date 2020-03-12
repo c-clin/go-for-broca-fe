@@ -54,7 +54,24 @@ export const fetchUserDecks = () => dispatch => {
 
 export const deleteUserDeck = id => dispatch => {
   axiosAPI.delete(`/decks/user/${id}`).then(res => {
-    console.log('res', res);
+    dispatch({
+      type: DELETE_USER_DECK_SUCCESS,
+      payload: id
+    });
+
+    dispatch(
+      showToaster({
+        type: TOASTER_TYPE_SUCCESS,
+        content: 'Successfully removed deck'
+      })
+    );
+  });
+};
+
+export const updateUserDesk = payload => dispatch => {
+  axiosAPI.put(`/decks/user/${payload.id}`, {
+    name: payload.name,
+    active: payload.active
   });
 };
 

@@ -16,6 +16,7 @@ export const addFlashcard = payload => dispatch => {
 };
 
 export const GET_LEARN_FLASHCARD_SUCCESS = 'GET_LEARN_FLASHCARD_SUCCESS';
+export const GET_LEARN_FLASHCARD_ERROR = 'GET_LEARN_FLASHCARD_ERROR';
 
 export const getLearnFlashcard = user_deck_id => dispatch => {
   let id = null;
@@ -40,6 +41,7 @@ export const getLearnFlashcard = user_deck_id => dispatch => {
 };
 
 export const GET_REVIEW_FLASHCARD_SUCCESS = 'GET_REVIEW_FLASHCARD_SUCCESS';
+export const GET_REVIEW_FLASHCARD_ERROR = 'GET_REVIEW_FLASHCARD_ERROR';
 
 export const getReviewFlashcard = () => dispatch => {
   axiosAPI.post('/repetitions').then(res => {

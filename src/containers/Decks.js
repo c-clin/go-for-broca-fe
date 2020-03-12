@@ -5,8 +5,11 @@ import classnames from 'classnames';
 import {
   fetchAllDecks,
   fetchUserDecks,
-  forkStandardDeck
+  forkStandardDeck,
+  deleteUserDeck
 } from '../store/actions/decksActions';
+
+import Button from '../components/Button';
 
 class Decks extends Component {
   state = {
@@ -84,8 +87,23 @@ class Decks extends Component {
                 )}
                 {userDecks.map(deck => {
                   return (
-                    <div key={deck.id} className='Decks__item'>
-                      {deck.name}
+                    <div>
+                      <div key={deck.id} className='Decks__item'>
+                        {deck.name}
+                      </div>
+
+                      {deck.id !== 1 && (
+                        <Button
+                          className='block-center'
+                          autoWidth
+                          onClick={() => this.props.deleteUserDeck(deck.id)}
+                        >
+                          <i
+                            className='far fa-trash-alt'
+                            style={{ color: 'red' }}
+                          ></i>
+                        </Button>
+                      )}
                     </div>
                   );
                 })}
@@ -108,5 +126,6 @@ const mapStateToProps = ({ Decks }) => {
 export default connect(mapStateToProps, {
   fetchAllDecks,
   fetchUserDecks,
-  forkStandardDeck
+  forkStandardDeck,
+  deleteUserDeck
 })(Decks);

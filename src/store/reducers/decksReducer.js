@@ -1,6 +1,7 @@
 import {
   FETCH_ALL_DECKS_SUCCESS,
-  FETCH_USER_DECKS_SUCCESS
+  FETCH_USER_DECKS_SUCCESS,
+  DELETE_USER_DECK_SUCCESS
 } from '../actions/decksActions';
 
 const initState = {
@@ -19,6 +20,15 @@ export default function(state = initState, action) {
       return {
         ...state,
         userDecks: action.payload
+      };
+    case DELETE_USER_DECK_SUCCESS:
+      let userDecks = state.userDecks.filter(
+        deck => deck.id !== action.payload
+      );
+
+      return {
+        ...state,
+        userDecks
       };
     default:
       return state;

@@ -1,7 +1,9 @@
 import {
   ADD_FLASHCARD,
   GET_LEARN_FLASHCARD_SUCCESS,
+  GET_LEARN_FLASHCARD_ERROR,
   GET_REVIEW_FLASHCARD_SUCCESS,
+  GET_REVIEW_FLASHCARD_ERROR,
   START_FLASHCARD_LOADER
 } from '../actions/flashcardActions';
 
@@ -36,6 +38,12 @@ export default function(state = initState, action) {
       return {
         ...state,
         learnCard: action.payload,
+        loading: false
+      };
+    case GET_LEARN_FLASHCARD_ERROR:
+    case GET_REVIEW_FLASHCARD_ERROR:
+      return {
+        ...state,
         loading: false
       };
     case START_FLASHCARD_LOADER:

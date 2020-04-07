@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 
 import {
   getLearnFlashcard,
-  startFlashcardLoader
+  startFlashcardLoader,
+  updateFlashcard,
 } from '../store/actions/flashcardActions';
 import Flashcard from '../components/Flashcard';
+import Button, { THEME_BLUE } from '../components/Button';
 import Loader from '../components/Loader';
 
 class Learn extends Component {
@@ -21,7 +23,7 @@ class Learn extends Component {
   };
 
   render() {
-    const { learnCard } = this.props;
+    const { learnCard, updateFlashcard } = this.props;
 
     if (this.props.loading || learnCard === null) {
       return <Loader />;
@@ -35,8 +37,18 @@ class Learn extends Component {
                 className='block-center'
                 front={learnCard.front}
                 back={learnCard.back}
+                flashcard={learnCard}
+                updateCard={updateFlashcard}
+                type={'learn'}
               />
-              <button onClick={this.onNext}>Next</button>
+              <Button
+                className='block-center'
+                autoWidth
+                theme={THEME_BLUE}
+                onClick={this.onNext}
+              >
+                Next
+              </Button>
             </div>
           </div>
         </div>
@@ -48,11 +60,12 @@ class Learn extends Component {
 const mapStateToProps = ({ Flashcards }) => {
   return {
     learnCard: Flashcards.learnCard,
-    loading: Flashcards.loading
+    loading: Flashcards.loading,
   };
 };
 
 export default connect(mapStateToProps, {
   getLearnFlashcard,
-  startFlashcardLoader
+  startFlashcardLoader,
+  updateFlashcard,
 })(Learn);

@@ -5,35 +5,50 @@ import { addFlashcard } from '../store/actions/flashcardActions';
 
 import Flashcard from '../components/Flashcard';
 
-class Flashcards extends Component {
-  state = {
+interface MyState {
+  front: string;
+  back: string;
+}
+
+interface FlashcardObject {
+  front: string;
+  back: string;
+}
+
+class Flashcards extends Component<{
+  addFlashcard: (arg0: FlashcardObject) => void;
+  flashcard: {};
+  flashcards: [FlashcardObject];
+}> {
+  state: MyState = {
     front: '',
-    back: ''
+    back: '',
   };
 
-  onInputChange = e => {
-    console.log(e.target.name);
+  onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   addNewFlashcard = () => {
     this.props.addFlashcard({
       front: this.state.front,
-      back: this.state.back
+      back: this.state.back,
     });
 
     this.setState({
       front: '',
-      back: ''
+      back: '',
     });
   };
 
   render() {
     const { flashcards } = this.props;
+
     return (
       <div className='Flashcards'>
+        <input />
         <h1 className='heading-1'>Flashcards</h1>
 
         <div className='Flashcards__container'>
@@ -63,8 +78,9 @@ class Flashcards extends Component {
                 Add
               </button>
             </div>
+            s
           </div>
-          {flashcards.map(flashcard => (
+          {flashcards.map((flashcard) => (
             <Flashcard front={flashcard.front} back={flashcard.back} />
           ))}
         </div>
@@ -73,9 +89,9 @@ class Flashcards extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: { Flashcards: { flashcards: any } }) => {
   return {
-    flashcards: state.Flashcards.flashcards
+    flashcards: state.Flashcards.flashcards,
   };
 };
 

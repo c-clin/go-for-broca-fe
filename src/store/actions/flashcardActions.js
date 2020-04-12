@@ -45,7 +45,14 @@ export const updateFlashcard = (payload, type) => (dispatch) => {
       }
     })
     .catch((e) => {
-      console.log(e);
+      if (e.response) {
+        dispatch(
+          showToaster({
+            type: TOASTER_TYPE_ERROR,
+            content: e.response.data.msg,
+          })
+        );
+      }
     });
 };
 

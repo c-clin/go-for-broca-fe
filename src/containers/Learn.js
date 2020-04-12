@@ -34,7 +34,6 @@ class Learn extends Component {
           <div className='page-content'>
             <div className='Learn__container'>
               <Flashcard
-                className='block-center'
                 front={learnCard.front}
                 back={learnCard.back}
                 flashcard={learnCard}

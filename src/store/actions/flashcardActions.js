@@ -65,11 +65,12 @@ export const getLearnFlashcard = (user_deck_id) => (dispatch) => {
   axiosAPI
     .post('/flashcards/view', { user_deck_id: id })
     .then((res) => {
-      console.log(res);
-      dispatch({
-        type: GET_LEARN_FLASHCARD_SUCCESS,
-        payload: res.data.flashcard,
-      });
+      if (res.data.flashcard) {
+        dispatch({
+          type: GET_LEARN_FLASHCARD_SUCCESS,
+          payload: res.data.flashcard,
+        });
+      }
     })
     .catch((e) => {
       if (e.response) {

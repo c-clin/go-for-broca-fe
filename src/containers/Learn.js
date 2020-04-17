@@ -8,7 +8,7 @@ import {
 } from '../store/actions/flashcardActions';
 import { fetchUserDecks } from '../store/actions/decksActions';
 import Flashcard from '../components/Flashcard';
-import Button, { THEME_BLUE } from '../components/Button';
+import Button, { THEME_BLUE, THEME_WHITE } from '../components/Button';
 import Loader from '../components/Loader';
 
 class Learn extends Component {
@@ -36,8 +36,40 @@ class Learn extends Component {
     this.props.getLearnFlashcard(this.state.deck_id);
   };
 
+  renderCard = () => {
+    const { learnCard, updateFlashcard } = this.props;
+
+    if (learnCard == null) {
+      return (
+        <p className='text-center'>
+          There are no remaining flashcards to learn at the moment.
+        </p>
+      );
+    } else {
+      return (
+        <>
+          <Flashcard
+            front={learnCard.front}
+            back={learnCard.back}
+            flashcard={learnCard}
+            updateCard={updateFlashcard}
+            type={'learn'}
+          />
+          <Button
+            className='block-center'
+            autoWidth
+            theme={THEME_BLUE}
+            onClick={this.onNext}
+          >
+            Next
+          </Button>
+        </>
+      );
+    }
+  };
+
   render() {
-    const { learnCard, updateFlashcard, userDecks, loading } = this.props;
+    const { userDecks, loading } = this.props;
     const { steps } = this.state;
 
     return (
@@ -45,7 +77,14 @@ class Learn extends Component {
         <h1 className='heading-1'>Learn</h1>
         <div className='page-content'>
           {steps == 2 && (
-            <button onClick={() => this.setState({ steps: 1 })}>Back</button>
+            <Button
+              autoWidth
+              pill
+              theme={THEME_WHITE}
+              onClick={() => this.setState({ steps: 1 })}
+            >
+              Back
+            </Button>
           )}
 
           {steps === 1 && (
@@ -69,23 +108,7 @@ class Learn extends Component {
               {loading ? (
                 <Loader />
               ) : (
-                <div className='Learn__container'>
-                  <Flashcard
-                    front={learnCard.front}
-                    back={learnCard.back}
-                    flashcard={learnCard}
-                    updateCard={updateFlashcard}
-                    type={'learn'}
-                  />
-                  <Button
-                    className='block-center'
-                    autoWidth
-                    theme={THEME_BLUE}
-                    onClick={this.onNext}
-                  >
-                    Next
-                  </Button>
-                </div>
+                <div className='Learn__container'>{this.renderCard()}</div>
               )}
             </div>
           )}

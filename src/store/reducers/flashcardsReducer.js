@@ -7,6 +7,8 @@ import {
   START_FLASHCARD_LOADER,
   UPDATE_LEARN_FLASHCARD_SUCCESS,
   UPDATE_REVIEW_FLASHCARD_SUCCESS,
+  CLEAR_LEARN_FLASHCARD,
+  CLEAR_REVIEW_FLASHCARD,
 } from '../actions/flashcardActions';
 
 const initState = {
@@ -42,10 +44,22 @@ export default function (state = initState, action) {
         learnCard: action.payload,
         loading: false,
       };
+    case GET_REVIEW_FLASHCARD_SUCCESS:
+      return {
+        ...state,
+        reviewCard: action.payload,
+        loading: false,
+      };
     case GET_LEARN_FLASHCARD_ERROR:
+      return {
+        ...state,
+        learnCard: null,
+        loading: false,
+      };
     case GET_REVIEW_FLASHCARD_ERROR:
       return {
         ...state,
+        reviewCard: null,
         loading: false,
       };
     case UPDATE_LEARN_FLASHCARD_SUCCESS:
@@ -54,8 +68,20 @@ export default function (state = initState, action) {
         learnCard: action.payload,
       };
     case UPDATE_REVIEW_FLASHCARD_SUCCESS:
+      action.payload.repetition = state.reviewCard.repetition;
       return {
         ...state,
+        reviewCard: action.payload,
+      };
+    case CLEAR_LEARN_FLASHCARD:
+      return {
+        ...state,
+        learnCard: null,
+      };
+    case CLEAR_REVIEW_FLASHCARD:
+      return {
+        ...state,
+        reviewCard: null,
       };
     case START_FLASHCARD_LOADER:
       return {

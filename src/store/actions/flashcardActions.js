@@ -58,8 +58,10 @@ export const updateFlashcard = (payload, type) => (dispatch) => {
 
 export const GET_LEARN_FLASHCARD_SUCCESS = 'GET_LEARN_FLASHCARD_SUCCESS';
 export const GET_LEARN_FLASHCARD_ERROR = 'GET_LEARN_FLASHCARD_ERROR';
+export const CLEAR_LEARN_FLASHCARD = 'CLEAR_LEARN_FLASHCARD';
 
 export const getLearnFlashcard = (user_deck_id) => (dispatch) => {
+  dispatch(startFlashcardLoader());
   let id = null;
   if (user_deck_id) id = user_deck_id;
   axiosAPI
@@ -69,6 +71,52 @@ export const getLearnFlashcard = (user_deck_id) => (dispatch) => {
         dispatch({
           type: GET_LEARN_FLASHCARD_SUCCESS,
           payload: res.data.flashcard,
+        });
+      } else {
+        dispatch({
+          type: GET_LEARN_FLASHCARD_SUCCESS,
+          payload: null,
+        });
+      }
+    })
+    .catch((e) => {
+      if (e.response) {
+        dispatch(
+          showToaster({
+            type: TOASTER_TYPE_ERROR,
+            content: e.response.data.msg,
+          })
+        );
+      }
+    });
+};
+export const clearLearnFlashcard = () => {
+  return {
+    type: CLEAR_LEARN_FLASHCARD,
+  };
+};
+
+export const GET_REVIEW_FLASHCARD_SUCCESS = 'GET_REVIEW_FLASHCARD_SUCCESS';
+export const GET_REVIEW_FLASHCARD_ERROR = 'GET_REVIEW_FLASHCARD_ERROR';
+export const CLEAR_REVIEW_FLASHCARD = 'CLEAR_REVIEW_FLASHCARD';
+
+export const getReviewFlashcard = (user_deck_id) => (dispatch) => {
+  dispatch(startFlashcardLoader());
+  let id = null;
+  if (user_deck_id) id = user_deck_id;
+  axiosAPI
+    .post('/repetitions', { user_deck_id: id })
+    .then((res) => {
+      if (res.data.flashcard) {
+        res.data.flashcard.repetition = res.data.repetition;
+        dispatch({
+          type: GET_REVIEW_FLASHCARD_SUCCESS,
+          payload: res.data.flashcard,
+        });
+      } else {
+        dispatch({
+          type: GET_REVIEW_FLASHCARD_SUCCESS,
+          payload: null,
         });
       }
     })
@@ -84,13 +132,29 @@ export const getLearnFlashcard = (user_deck_id) => (dispatch) => {
     });
 };
 
-export const GET_REVIEW_FLASHCARD_SUCCESS = 'GET_REVIEW_FLASHCARD_SUCCESS';
-export const GET_REVIEW_FLASHCARD_ERROR = 'GET_REVIEW_FLASHCARD_ERROR';
+export const clearReviewFlashcard = () => {
+  return {
+    type: CLEAR_REVIEW_FLASHCARD,
+  };
+};
 
-export const getReviewFlashcard = () => (dispatch) => {
-  axiosAPI.post('/repetitions').then((res) => {
-    console.log(res);
-  });
+export const SUBMIT_REPETITION = 'SUBMIT_REPETITION';
+export const SUBMIT_REPETITION_SUCCESS = 'SUBMIT_REPETITION_SUCCESS';
+export const SUBMIT_REPETITION_ERROR = 'SUBMIT_REPETITION_ERROR';
+
+export const submitRepetition = (repetition_id, score, callback) => (
+  dispatch
+) => {
+  axiosAPI
+    .post(`/repetitions/${repetition_id}`, { score })
+    .then((res) => {
+      console.log(res);
+
+      if (callback) {
+        callback();
+      }
+    })
+    .catch((e) => {});
 };
 
 export const START_FLASHCARD_LOADER = 'START_FLASHCARD_LOADER';

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import {
   getLearnFlashcard,
-  startFlashcardLoader,
   updateFlashcard,
 } from '../store/actions/flashcardActions';
 import { fetchUserDecks } from '../store/actions/decksActions';
@@ -81,7 +80,7 @@ class Learn extends Component {
               autoWidth
               pill
               theme={THEME_WHITE}
-              onClick={() => this.setState({ steps: 1 })}
+              onClick={() => this.setState({ steps: 1, deck_id: null })}
             >
               Back
             </Button>
@@ -128,7 +127,6 @@ const mapStateToProps = ({ Flashcards, Decks }) => {
 
 export default connect(mapStateToProps, {
   getLearnFlashcard,
-  startFlashcardLoader,
   updateFlashcard,
   fetchUserDecks,
 })(Learn);

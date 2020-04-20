@@ -1,0 +1,12 @@
+.Review {
+  &__score-container {
+    display: flex;
+    justify-content: center;
+
+    button {
+      &:not(:last-of-type) {
+        margin-right: 3px;
+      }
+    }
+  }
+}

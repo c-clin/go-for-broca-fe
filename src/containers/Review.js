@@ -48,7 +48,11 @@ class Review extends Component {
 
   renderCard = () => {
     const { reviewCard, updateFlashcard } = this.props;
-    const scores = [0, 1, 2];
+    const scores = [
+      'far fa-meh',
+      'far fa-smile-beam',
+      'far fa-grin-tongue-wink',
+    ];
 
     if (reviewCard == null) {
       return (
@@ -76,7 +80,7 @@ class Review extends Component {
                   pill
                   theme={THEME_BLUE}
                 >
-                  {score}
+                  <i style={{ fontSize: '17px' }} className={score} />
                 </Button>
               );
             })}

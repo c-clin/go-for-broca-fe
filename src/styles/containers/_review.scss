@@ -2,8 +2,28 @@
   &__score-container {
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+
+    svg {
+      color: dodgerblue;
+      font-size: 30px;
+    }
 
     button {
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      transition: transform 0.3s;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        transform: scale(1.08);
+        transition: transform 0.3s;
+      }
+
       &:not(:last-of-type) {
         margin-right: 3px;
       }

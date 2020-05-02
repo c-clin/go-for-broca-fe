@@ -24,6 +24,30 @@ class Review extends Component {
     };
   }
 
+  componentDidMount = () => {
+    document.addEventListener('keydown', this.handleKey);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener('keydown', this.handleKey);
+  };
+
+  handleKey = (e) => {
+    switch (e.keyCode) {
+      case 48:
+        return this.submitRepetition(0);
+      case 49:
+        return this.submitRepetition(1);
+      case 50:
+        return this.submitRepetition(2);
+      case 8:
+        if (this.state.steps == 2) this.onGoBack();
+        return;
+      default:
+        return;
+    }
+  };
+
   onSelectDeck = (id) => {
     this.setState({
       deck_id: id,
@@ -49,9 +73,9 @@ class Review extends Component {
   renderCard = () => {
     const { reviewCard, updateFlashcard } = this.props;
     const scores = [
-      'far fa-meh',
-      'far fa-smile-beam',
-      'far fa-grin-tongue-wink',
+      { number: 0, icon: 'fas fa-frown' },
+      { number: 1, icon: 'fas fa-smile-beam' },
+      { number: 2, icon: 'fas fa-laugh-wink' },
     ];
 
     if (reviewCard == null) {
@@ -72,16 +96,11 @@ class Review extends Component {
           />
 
           <div className='Review__score-container'>
-            {scores.map((score) => {
+            {scores.map(({ number, icon }) => {
               return (
-                <Button
-                  onClick={() => this.submitRepetition(score)}
-                  autoWidth
-                  pill
-                  theme={THEME_BLUE}
-                >
-                  <i style={{ fontSize: '17px' }} className={score} />
-                </Button>
+                <button onClick={() => this.submitRepetition(number)}>
+                  <i className={icon} />
+                </button>
               );
             })}
           </div>

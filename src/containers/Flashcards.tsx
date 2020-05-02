@@ -78,7 +78,6 @@ class Flashcards extends Component<{
                 Add
               </button>
             </div>
-            s
           </div>
           {flashcards.map((flashcard) => (
             <Flashcard front={flashcard.front} back={flashcard.back} />

@@ -9,15 +9,14 @@ class Flashcard extends Component {
     backInput: this.props.back,
   };
 
-  onFlipCard = (e) => {
-    if (e.target.id !== 'edit') {
-      this.setState({
-        front: !this.state.front,
-      });
-    }
+  onFlipCard = () => {
+    this.setState({
+      front: !this.state.front,
+    });
   };
 
-  onEdit = () => {
+  onEdit = (e) => {
+    e.stopPropagation();
     this.setState({
       editing: true,
     });
@@ -33,6 +32,12 @@ class Flashcard extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
+  };
+
+  playSound = (e) => {
+    e.stopPropagation();
+    const audioEl = document.getElementsByClassName('audio-element')[0];
+    audioEl.play();
   };
 
   componentDidUpdate = (prevProps) => {
@@ -64,7 +69,7 @@ class Flashcard extends Component {
   };
 
   render() {
-    const { front, back, className } = this.props;
+    const { front, back, className, flashcard } = this.props;
 
     return (
       <div
@@ -107,9 +112,18 @@ class Flashcard extends Component {
             <div>
               <h3>{this.state.front ? front : back}</h3>
 
+              <audio className='audio-element'>
+                <source src={flashcard.audio_url} />
+              </audio>
+
               <div className='Flashcard__cta'>
-                <button id='edit' onClick={this.onEdit}>
-                  <i className='far fa-edit' />
+                {this.state.front && flashcard.audio_url && (
+                  <button id='sound' onClick={this.playSound}>
+                    <i className='fas fa-volume-up' />
+                  </button>
+                )}
+                <button onClick={this.onEdit}>
+                  <i id='edit' className='far fa-edit' />
                 </button>
               </div>
             </div>

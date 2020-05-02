@@ -48,10 +48,9 @@ class Flashcards extends Component<{
 
     return (
       <div className='Flashcards'>
-        <input />
         <h1 className='heading-1'>Flashcards</h1>
 
-        <div className='Flashcards__container'>
+        {/* <div className='Flashcards__container'>
           <div className='Flashcards__new'>
             <div className='Flashcards__new--container'>
               New Card:
@@ -82,7 +81,7 @@ class Flashcards extends Component<{
           {flashcards.map((flashcard) => (
             <Flashcard front={flashcard.front} back={flashcard.back} />
           ))}
-        </div>
+        </div> */}
       </div>
     );
   }

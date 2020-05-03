@@ -53,6 +53,14 @@ class Header extends Component {
         component: (
           <GoogleLogout
             clientId={`${keys.GOOGLE_CLIENT_ID}`}
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                Logout
+              </button>
+            )}
             buttonText='Logout'
             onLogoutSuccess={this.onLoggingOut}
           />
@@ -75,7 +83,7 @@ class Header extends Component {
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
               >
-                This is my custom Google button
+                Login
               </button>
             )}
             buttonText='Login'

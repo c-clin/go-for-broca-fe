@@ -3,7 +3,11 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import axiosAPI from './axios-api';
-import { setIsSignedIn, startAuthLoading } from './store/actions/authActions';
+import {
+  setIsSignedIn,
+  startAuthLoading,
+  fetchUser,
+} from './store/actions/authActions';
 
 import LoginPage from './containers/LoginPage';
 import Header from './components/Header';
@@ -21,105 +25,68 @@ if (localStorage.token) {
 }
 
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {};
 
-    this.googleLoadTimer = 0;
+    props.fetchUser();
   }
 
-  componentDidMount = () => {
-    if (this.props.isSignedIn === null) {
-      this.props.startAuthLoading();
-      this.googleLoadTimer = setInterval(this.checkGoogleLoader, 90);
-    }
-  };
-
-  signInChange = val => {
-    clearInterval(this.googleLoadTimer);
-    this.props.setIsSignedIn(val);
-  };
-
-  checkGoogleLoader = () => {
-    console.log('check----------');
-    if (window.gapi.auth2) {
-      setTimeout(() => {
-        let isSignedIn = window.gapi.auth2.getAuthInstance().isSignedIn.get();
-        this.props.setIsSignedIn(isSignedIn);
-        window.gapi.auth2
-          .getAuthInstance()
-          .isSignedIn.listen(this.signInChange);
-      }, 500);
-
-      clearInterval(this.googleLoadTimer);
-    }
-  };
-
-  authCheck = (Component, props) => {
-    return this.props.isSignedIn ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to={'/login'} />
-    );
-  };
+  // authCheck = (Component, props) => {
+  //   console.log('auth check');
+  //   return this.props.isSignedIn ? (
+  //     <Component {...props} />
+  //   ) : (
+  //     <Redirect to={'/login'} />
+  //   );
+  // };
 
   componentWillUnmount = () => {
     clearInterval(this.googleLoadTimer);
   };
 
+  renderApp = () => {
+    if (this.props.isLoading) {
+      return <Loader />;
+    } else {
+      return (
+        <div style={{ display: this.props.isLoading ? 'none' : 'block' }}>
+          <Toaster toaster={this.props.toaster} />
+          <Header isSignedIn={this.props.isSignedIn} />
+          {/* [TODO]: move all login logic to App */}
+          <div className='app-layout'>
+            <Route path='/' exact component={Landing} />
+            <Route path='/login' exact component={LoginPage} />
+            <Route path='/review' exact component={Review} />
+            <Route path='/learn' exact component={Learn} />
+            <Route path='/decks' exact component={Decks} />
+            <Route path='/flashcards' exact component={Flashcards} />
+            <Route render={() => <Redirect to='/' />} />
+          </div>
+        </div>
+      );
+    }
+  };
+
   render() {
     return (
       <div className='App'>
-        <BrowserRouter>
-          {this.props.isLoading && <Loader />}
-
-          <div style={{ display: this.props.isLoading ? 'none' : 'block' }}>
-            <Toaster toaster={this.props.toaster} />
-            <Header isSignedIn={this.props.isSignedIn} />
-            {/* [TODO]: move all login logic to App */}
-            <div className='app-layout'>
-              <Route
-                path='/'
-                exact
-                render={props => this.authCheck(Landing, props)}
-              />
-              <Route path='/login' exact component={LoginPage} />
-              <Route
-                path='/review'
-                exact
-                render={props => this.authCheck(Review, props)}
-              />
-              <Route
-                path='/learn'
-                exact
-                render={props => this.authCheck(Learn, props)}
-              />
-              <Route
-                path='/decks'
-                exact
-                render={props => this.authCheck(Decks, props)}
-              />
-              <Route
-                path='/flashcards'
-                exact
-                render={props => this.authCheck(Flashcards, props)}
-              />
-            </div>
-          </div>
-        </BrowserRouter>
+        <BrowserRouter>{this.renderApp()}</BrowserRouter>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isSignedIn: state.Auth.isSignedIn,
     isLoading: state.Auth.isLoading,
-    toaster: state.UI.toaster
+    toaster: state.UI.toaster,
   };
 };
 
-export default connect(mapStateToProps, { setIsSignedIn, startAuthLoading })(
-  App
-);
+export default connect(mapStateToProps, {
+  fetchUser,
+  setIsSignedIn,
+  startAuthLoading,
+})(App);

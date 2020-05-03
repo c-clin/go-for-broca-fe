@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setIsSignedIn, addUser } from '../store/actions/authActions';
+import {
+  setIsSignedIn,
+  addUser,
+  fetchUser,
+} from '../store/actions/authActions';
 import keys from '../config/keys';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import axiosAPI from '../axios-api';
 
 class LoginPage extends Component {
-  onLoginSuccess = res => {
+  onLoginSuccess = (res) => {
     localStorage.setItem('token', res.tokenId);
     axiosAPI.defaults.headers.common['Authorization'] = `bearer ${res.tokenId}`;
-    console.log('res--- ', res);
+    this.props.fetchUser();
     this.props.addUser(res.profileObj.email);
     this.props.history.push('/decks');
   };
 
-  onLoginFailure = res => {
+  onLoginFailure = (res) => {
     localStorage.removeItem('token');
   };
 
@@ -38,6 +42,14 @@ class LoginPage extends Component {
         ) : (
           <GoogleLogin
             clientId={`${keys.GOOGLE_CLIENT_ID}`}
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                This is my custom Google button
+              </button>
+            )}
             buttonText='Login'
             onSuccess={this.onLoginSuccess}
             onFailure={this.onLoginFailure}
@@ -49,10 +61,12 @@ class LoginPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isSignedIn: state.Auth.isSignedIn
+    isSignedIn: state.Auth.isSignedIn,
   };
 };
 
-export default connect(mapStateToProps, { setIsSignedIn, addUser })(LoginPage);
+export default connect(mapStateToProps, { setIsSignedIn, addUser, fetchUser })(
+  LoginPage
+);

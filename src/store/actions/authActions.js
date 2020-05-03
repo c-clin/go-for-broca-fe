@@ -9,17 +9,23 @@ export const fetchUser = () => (dispatch) => {
   axiosAPI
     .get('/users')
     .then((res) => {
-      console.log(res);
       dispatch({
         type: FETCH_USER_SUCCESS,
       });
     })
     .catch((e) => {
-      dispatch({
-        type: FETCH_USER_ERROR,
-      });
-      console.log('log out!!!');
+      dispatch(onLogout());
     });
+};
+
+export const ON_LOGOUT_SUCCESS = 'ON_LOGOUT_SUCCESS';
+
+export const onLogout = () => (dispatch) => {
+  localStorage.removeItem('token');
+
+  dispatch({
+    type: ON_LOGOUT_SUCCESS,
+  });
 };
 
 export const SET_IS_SIGNED_IN = 'SET_IS_SIGNED_IN';

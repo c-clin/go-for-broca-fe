@@ -56,7 +56,7 @@ class App extends Component {
           {/* [TODO]: move all login logic to App */}
           <div className='app-layout'>
             <Route path='/' exact component={Landing} />
-            <Route path='/login' exact component={LoginPage} />
+            {/* <Route path='/login' exact component={LoginPage} /> */}
             <Route path='/review' exact component={Review} />
             <Route path='/learn' exact component={Learn} />
             <Route path='/decks' exact component={Decks} />

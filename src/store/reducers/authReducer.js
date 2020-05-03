@@ -1,13 +1,13 @@
 import {
   FETCH_USER_SUCCESS,
-  FETCH_USER_ERROR,
   SET_IS_SIGNED_IN,
   AUTH_LOADING_START,
+  ON_LOGOUT_SUCCESS,
 } from '../actions/authActions';
 
 const initState = {
   isLoading: false,
-  isSignedIn: null,
+  isSignedIn: false,
 };
 
 export default function (state = initState, action) {
@@ -16,11 +16,6 @@ export default function (state = initState, action) {
       return {
         ...state,
         isSignedIn: true,
-        isLoading: false,
-      };
-    case FETCH_USER_ERROR:
-      return {
-        ...state,
         isLoading: false,
       };
     case SET_IS_SIGNED_IN:
@@ -33,6 +28,12 @@ export default function (state = initState, action) {
       return {
         ...state,
         isLoading: true,
+      };
+    case ON_LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isSignedIn: false,
+        isLoading: false,
       };
     default:
       return state;

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  setIsSignedIn,
-  addUser,
-  fetchUser,
-} from '../store/actions/authActions';
+import { addUser, fetchUser } from '../store/actions/authActions';
 import keys from '../config/keys';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import axiosAPI from '../axios-api';
@@ -42,14 +38,14 @@ class LoginPage extends Component {
         ) : (
           <GoogleLogin
             clientId={`${keys.GOOGLE_CLIENT_ID}`}
-            render={(renderProps) => (
-              <button
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                This is my custom Google button
-              </button>
-            )}
+            // render={(renderProps) => (
+            //   <button
+            //     onClick={renderProps.onClick}
+            //     disabled={renderProps.disabled}
+            //   >
+            //     LOG INnnn
+            //   </button>
+            // )}
             buttonText='Login'
             onSuccess={this.onLoginSuccess}
             onFailure={this.onLoginFailure}
@@ -67,6 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setIsSignedIn, addUser, fetchUser })(
-  LoginPage
-);
+export default connect(mapStateToProps, { addUser, fetchUser })(LoginPage);

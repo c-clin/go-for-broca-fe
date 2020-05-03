@@ -10,7 +10,7 @@ import {
 } from '../store/actions/flashcardActions';
 
 import Flashcard from '../components/Flashcard';
-import Button, { THEME_WHITE, THEME_BLUE } from '../components/Button';
+import Button, { THEME_WHITE } from '../components/Button';
 import Loader from '../components/Loader';
 
 class Review extends Component {
@@ -34,15 +34,12 @@ class Review extends Component {
 
   handleKey = (e) => {
     switch (e.keyCode) {
-      case 48:
-        return this.submitRepetition(0);
       case 49:
-        return this.submitRepetition(1);
+        return this.submitRepetition(0);
       case 50:
+        return this.submitRepetition(1);
+      case 51:
         return this.submitRepetition(2);
-      case 8:
-        if (this.state.steps == 2) this.onGoBack();
-        return;
       default:
         return;
     }

@@ -9,6 +9,20 @@ class Flashcard extends Component {
     backInput: this.props.back,
   };
 
+  componentDidMount = () => {
+    document.addEventListener('keydown', this.handleKey);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener('keydown', this.handleKey);
+  };
+
+  handleKey = (e) => {
+    if (e.keyCode == 32) {
+      this.onFlipCard();
+    }
+  };
+
   onFlipCard = () => {
     this.setState({
       front: !this.state.front,

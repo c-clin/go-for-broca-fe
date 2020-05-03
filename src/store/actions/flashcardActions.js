@@ -148,8 +148,6 @@ export const submitRepetition = (repetition_id, score, callback) => (
   axiosAPI
     .post(`/repetitions/${repetition_id}`, { score })
     .then((res) => {
-      console.log(res);
-
       if (callback) {
         callback();
       }

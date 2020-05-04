@@ -18,6 +18,16 @@ class Flashcard extends Component {
   };
 
   handleKey = (e) => {
+    switch (e.keyCode) {
+      case 32:
+        this.onFlipCard();
+        return;
+      case 83:
+        this.playSound();
+        return;
+      default:
+        return;
+    }
     if (e.keyCode == 32) {
       this.onFlipCard();
     }
@@ -49,7 +59,8 @@ class Flashcard extends Component {
   };
 
   playSound = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
+
     const audioEl = document.getElementsByClassName('audio-element')[0];
     audioEl.play();
   };

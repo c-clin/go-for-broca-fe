@@ -113,7 +113,7 @@ class Review extends Component {
       <div className='Review'>
         <h1 className='heading-1'>Review</h1>
         <div className='page-content'>
-          {steps == 2 && (
+          {steps === 2 && (
             <Button autoWidth pill theme={THEME_WHITE} onClick={this.onGoBack}>
               Back
             </Button>
@@ -135,7 +135,7 @@ class Review extends Component {
             </div>
           )}
 
-          {steps == 2 && (
+          {steps === 2 && (
             <>
               {loading ? (
                 <Loader />

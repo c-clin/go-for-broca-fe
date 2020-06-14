@@ -75,7 +75,7 @@ class Learn extends Component {
       <div className='Learn'>
         <h1 className='heading-1'>Learn</h1>
         <div className='page-content'>
-          {steps == 2 && (
+          {steps === 2 && (
             <Button
               autoWidth
               pill

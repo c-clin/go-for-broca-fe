@@ -10,7 +10,9 @@ class Flashcard extends Component {
   };
 
   componentDidMount = () => {
-    document.addEventListener('keydown', this.handleKey);
+    if (window.location.pathname !== '/flashcards') {
+      document.addEventListener('keydown', this.handleKey);
+    }
   };
 
   componentWillUnmount = () => {
@@ -57,9 +59,8 @@ class Flashcard extends Component {
 
   playSound = (e) => {
     if (e) e.stopPropagation();
-
-    const audioEl = document.getElementsByClassName('audio-element')[0];
-    audioEl.play();
+    const audio = new Audio(this.props.flashcard.audio_url);
+    audio.play();
   };
 
   componentDidUpdate = (prevProps) => {

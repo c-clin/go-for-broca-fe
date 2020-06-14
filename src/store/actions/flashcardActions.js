@@ -6,6 +6,27 @@ import {
   TOASTER_TYPE_ERROR,
 } from '../../components/Toaster';
 
+export const FETCH_FLASHCARDS = 'FETCH_FLASHCARDS';
+
+export const fetchFlashcards = (payload) => (dispatch) => {
+  let body = {
+    page_number: 1,
+    page_size: 20,
+    standard_deck_id: '',
+    user_deck_id: '',
+    ...payload,
+  };
+
+  axiosAPI
+    .get(
+      `/flashcards/?page_number=${body.page_number}&page_size=${body.page_size}&standard_deck_id=${body.standard_deck_id}&user_deck_id=${body.user_deck_id}`
+    )
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((e) => {});
+};
+
 export const ADD_FLASHCARD = 'ADD_FLASHCARD';
 export const UPDATE_LEARN_FLASHCARD_SUCCESS = 'UPDATE_LEARN_FLASHCARD_SUCCESS';
 export const UPDATE_REVIEW_FLASHCARD_SUCCESS =
@@ -32,7 +53,7 @@ export const updateFlashcard = (payload, type) => (dispatch) => {
         })
       );
 
-      if (type == 'learn') {
+      if (type === 'learn') {
         dispatch({
           type: UPDATE_LEARN_FLASHCARD_SUCCESS,
           payload: res.data.flashcard,

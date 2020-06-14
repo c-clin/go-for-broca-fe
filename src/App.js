@@ -9,6 +9,7 @@ import {
   fetchUser,
 } from './store/actions/authActions';
 
+import { ReactQueryDevtools } from 'react-query-devtools';
 import LoginPage from './containers/LoginPage';
 import Header from './components/Header';
 import Landing from './containers/Landing';
@@ -53,14 +54,17 @@ class App extends Component {
         <div style={{ display: this.props.isLoading ? 'none' : 'block' }}>
           <Toaster toaster={this.props.toaster} />
           <Header isSignedIn={this.props.isSignedIn} />
+          <Route path='/' exact component={Landing} />
+
           <div className='app-layout'>
-            <Route path='/' exact component={Landing} />
             <Route path='/review' exact component={Review} />
             <Route path='/learn' exact component={Learn} />
             <Route path='/decks' exact component={Decks} />
             <Route path='/flashcards' exact component={Flashcards} />
             {/* <Route render={() => <Redirect to='/' />} /> */}
           </div>
+
+          <ReactQueryDevtools initialIsOpe={false} />
         </div>
       );
     }

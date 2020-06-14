@@ -20,12 +20,10 @@ class Header extends Component {
   };
 
   onLoginFailure = (res) => {
-    console.log('LOGOUT FAIL');
     localStorage.removeItem('token');
   };
 
   onLoggingOut = () => {
-    console.log('LOGOUT ');
     this.props.onLogout();
     this.props.history.push('/');
   };

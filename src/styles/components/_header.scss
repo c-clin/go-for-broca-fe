@@ -1,8 +1,12 @@
+@import '..//lib/variables';
+
 .Header {
-  background: dodgerblue;
+  background: $gray1;
 
   &__nav {
     height: 60px;
+    position: relative;
+    z-index: 1;
 
     ul {
       list-style: none;
@@ -17,6 +21,10 @@
       display: flex;
       align-items: center;
       color: #fff;
+
+      &:hover {
+        color: $green1;
+      }
 
       button {
         &:focus {
@@ -34,6 +42,7 @@
         a {
           font-family: 'Pacifico', cursive;
           font-size: 25px;
+          color: $green1;
         }
       }
 
@@ -46,6 +55,7 @@
         color: #fff;
 
         &:hover {
+          color: $green1;
         }
       }
     }

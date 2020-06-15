@@ -57,21 +57,28 @@
   &__content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+
+    @media screen and (max-width: 800px) {
+      justify-content: center;
+    }
 
     .Flashcard {
-      width: 220px;
+      width: 30%;
       height: 130px;
-      margin: 15px;
+      margin: 10px;
+      padding: 5px;
+      box-sizing: border-box;
     }
   }
 
   &__new {
     border: 2px dotted rgba(0, 0, 0, 0.4);
     background-color: #fef5f8;
-    width: 220px;
+    width: 30%;
     height: 130px;
-    margin: 15px;
+    margin: 10px;
+    padding: 5px;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,6 +96,10 @@
           outline: none;
         }
       }
+    }
+
+    &--cta {
+      cursor: pointer;
     }
   }
 }

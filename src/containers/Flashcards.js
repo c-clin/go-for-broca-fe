@@ -18,6 +18,9 @@ function Flashcards(props) {
   const [deckId, setDeckId] = useState(1);
   const [values, onInputChange] = useForm({ front: '', back: '' });
 
+  const frontInputRef = useRef();
+  const backInputRef = useRef();
+
   useEffect(() => {
     props.fetchUserDecks();
   }, []);
@@ -32,7 +35,7 @@ function Flashcards(props) {
 
   let content = null;
 
-  const { status, data, error } = useQuery(deckId, fetchFlashcards);
+  const { status, data, error, refetch } = useQuery(deckId, fetchFlashcards);
 
   if (status == 'loading') {
     content = <Loader />;
@@ -43,8 +46,19 @@ function Flashcards(props) {
 
   content = data;
 
+  const clearInputs = () => {
+    frontInputRef.current.value = '';
+    backInputRef.current.value = '';
+  };
+
   const onSelectingDeck = (deckId) => {
     setDeckId(deckId);
+    clearInputs();
+  };
+
+  const onAddingFlashcard = () => {
+    clearInputs();
+    props.addFlashcard({ ...values, user_deck_id: deckId }, refetch);
   };
 
   return (
@@ -73,12 +87,13 @@ function Flashcards(props) {
       <div className='Flashcards__content'>
         {status === 'loading' && <Loader />}
 
-        {status == 'success' && deckId == 1 && (
+        {status == 'success' && (
           <div className='Flashcards__new'>
             <div className='Flashcards__new--container'>
               <h3>New Flashcard:</h3>
               <div>
                 <input
+                  ref={frontInputRef}
                   placeholder='Front'
                   name='front'
                   value={values.frontInput}
@@ -87,13 +102,17 @@ function Flashcards(props) {
               </div>
               <div>
                 <input
+                  ref={backInputRef}
                   placeholder='Back'
                   name='back'
                   value={values.backInput}
                   onChange={onInputChange}
                 />
               </div>
-              <button onClick={() => props.addFlashcard(values)}>
+              <button
+                className='Flashcards__new--cta'
+                onClick={onAddingFlashcard}
+              >
                 <i className='fas fa-plus' />
               </button>
             </div>
@@ -105,6 +124,7 @@ function Flashcards(props) {
           content.map((flashcard) => {
             return (
               <Flashcard
+                key={flashcard.id}
                 front={flashcard.front}
                 back={flashcard.back}
                 flashcard={flashcard}

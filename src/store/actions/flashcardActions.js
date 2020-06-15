@@ -30,18 +30,13 @@ export const fetchFlashcards = (payload) => (dispatch) => {
 export const ADD_FLASHCARD_SUCCESS = 'ADD_FLASHCARD_SUCCESS';
 export const ADD_FLASHCARD_ERROR = 'ADD_FLASHCARD_ERROR';
 
-export const addFlashcard = (payload) => (dispatch) => {
-  console.log(payload);
+export const addFlashcard = (payload, callback) => (dispatch) => {
   payload.language_id = 1;
-  payload.user_deck_id = 1;
 
   axiosAPI.post(`/flashcards`, { ...payload }).then((res) => {
     console.log(res);
+    callback();
   });
-  // dispatch({
-  //   type: ADD_FLASHCARD,
-  //   payload,
-  // });
 };
 
 export const UPDATE_LEARN_FLASHCARD_SUCCESS = 'UPDATE_LEARN_FLASHCARD_SUCCESS';

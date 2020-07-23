@@ -39,6 +39,11 @@
         padding: 7px 8px 5px 9px;
       }
 
+      &:nth-of-type(3) {
+        margin-left: 3px;
+        padding: 7px 8px 5px 9px;
+      }
+
       &:hover {
         border: 1px solid #747474;
         transition: border-color 0.3s;
@@ -46,7 +51,8 @@
         .fa-edit,
         .fa-check,
         .fa-times,
-        .fa-volume-up {
+        .fa-volume-up,
+        .fa-trash-alt {
           color: #747474;
         }
       }
@@ -59,7 +65,8 @@
     .fa-edit,
     .fa-check,
     .fa-times,
-    .fa-volume-up {
+    .fa-volume-up,
+    .fa-trash-alt {
       font-size: 12px;
       transition: color 0.3s;
       color: #b8b8b8;

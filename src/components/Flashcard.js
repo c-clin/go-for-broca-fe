@@ -45,6 +45,11 @@ class Flashcard extends Component {
     });
   };
 
+  onDelete = (e) => {
+    e.stopPropagation();
+    this.props.deleteCard({ id: this.props.flashcard.id });
+  };
+
   finishEditing = () => {
     this.setState({
       editing: false,
@@ -148,6 +153,12 @@ class Flashcard extends Component {
                 <button onClick={this.onEdit}>
                   <i id='edit' className='far fa-edit' />
                 </button>
+
+                {this.props.deleteCard && (
+                  <button onClick={this.onDelete}>
+                    <i id='delete' className='far fa-trash-alt' />
+                  </button>
+                )}
               </div>
             </div>
           )}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, queryCache } from 'react-query';
 import classnames from 'classnames';
 
 import axiosAPI from '../axios-api';
@@ -9,6 +9,11 @@ import {
   updateFlashcard,
   addFlashcard,
 } from '../store/actions/flashcardActions';
+import { showToaster } from '../store/actions/uiActions';
+import {
+  TOASTER_TYPE_ERROR,
+  TOASTER_TYPE_SUCCESS,
+} from '../components/Toaster';
 
 import Flashcard from '../components/Flashcard';
 import Loader from '../components/Loader';
@@ -45,6 +50,27 @@ function Flashcards(props) {
   }
 
   content = data;
+
+  const handleDeleteFlashcard = ({ id }) => {
+    axiosAPI
+      .delete(`/flashcards/${id}/`)
+      .then((res) => {
+        let newContent = content.filter((flashcard) => flashcard.id != id);
+        queryCache.setQueryData(deckId, newContent);
+        props.showToaster({
+          type: TOASTER_TYPE_SUCCESS,
+          content: 'The flashcard was successfully deleted!',
+        });
+      })
+      .catch((e) => {
+        props.showToaster({
+          type: TOASTER_TYPE_ERROR,
+          content: 'Something went wrong.',
+        });
+      });
+  };
+
+  const [mutate] = useMutation(handleDeleteFlashcard);
 
   const clearInputs = () => {
     frontInputRef.current.value = '';
@@ -87,7 +113,7 @@ function Flashcards(props) {
       <div className='Flashcards__content'>
         {status === 'loading' && <Loader />}
 
-        {status == 'success' && (
+        {status === 'success' && (
           <div className='Flashcards__new'>
             <div className='Flashcards__new--container'>
               <h3>New Flashcard:</h3>
@@ -129,6 +155,7 @@ function Flashcards(props) {
                 back={flashcard.back}
                 flashcard={flashcard}
                 updateCard={updateFlashcard}
+                deleteCard={mutate}
               />
             );
           })}
@@ -145,4 +172,5 @@ export default connect(mapStateToProps, {
   fetchUserDecks,
   updateFlashcard,
   addFlashcard,
+  showToaster,
 })(Flashcards);

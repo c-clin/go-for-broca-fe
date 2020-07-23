@@ -5,10 +5,6 @@ import classnames from 'classnames';
 
 import axiosAPI from '../axios-api';
 import { fetchUserDecks } from '../store/actions/decksActions';
-import {
-  updateFlashcard,
-  addFlashcard,
-} from '../store/actions/flashcardActions';
 import { showToaster } from '../store/actions/uiActions';
 import {
   TOASTER_TYPE_ERROR,
@@ -40,7 +36,7 @@ function Flashcards(props) {
 
   let content = null;
 
-  const { status, data, error, refetch } = useQuery(deckId, fetchFlashcards);
+  const { status, data, error } = useQuery(deckId, fetchFlashcards);
 
   if (status == 'loading') {
     content = <Loader />;
@@ -50,6 +46,13 @@ function Flashcards(props) {
   }
 
   content = data;
+
+  const callErrorToaster = () => {
+    props.showToaster({
+      type: TOASTER_TYPE_ERROR,
+      content: 'Something went wrong.',
+    });
+  };
 
   const handleDeleteFlashcard = ({ id }) => {
     axiosAPI
@@ -62,15 +65,54 @@ function Flashcards(props) {
           content: 'The flashcard was successfully deleted!',
         });
       })
-      .catch((e) => {
-        props.showToaster({
-          type: TOASTER_TYPE_ERROR,
-          content: 'Something went wrong.',
-        });
-      });
+      .catch((e) => callErrorToaster());
   };
 
-  const [mutate] = useMutation(handleDeleteFlashcard);
+  const handleAddFlashcard = () => {
+    const payload = {
+      ...values,
+      user_deck_id: deckId,
+      language_id: 1,
+    };
+    axiosAPI
+      .post(`/flashcards`, { ...payload })
+      .then((res) => {
+        console.log(res);
+        let newContent = content.unshift(res.data.flashcard);
+        queryCache.setQueryData(deckId, newContent);
+        props.showToaster({
+          type: TOASTER_TYPE_SUCCESS,
+          content: 'The flashcard was successfully added!',
+        });
+      })
+      .catch((e) => callErrorToaster());
+  };
+
+  const handleUpdateFlashcard = (payload) => {
+    axiosAPI
+      .put(`/flashcards/${payload.id}/`, {
+        front: payload.front,
+        back: payload.back,
+      })
+      .then((res) => {
+        let newContent = content.map((flashcard) => {
+          if (flashcard.id == payload.id) {
+            return res.data.flashcard;
+          }
+          return flashcard;
+        });
+        queryCache.setQueryData(deckId, newContent);
+        props.showToaster({
+          type: TOASTER_TYPE_SUCCESS,
+          content: 'The flashcard was successfully added!',
+        });
+      })
+      .catch((e) => callErrorToaster());
+  };
+
+  const [mutateDelete] = useMutation(handleDeleteFlashcard);
+  const [mutateAdd] = useMutation(handleAddFlashcard);
+  const [mudateUpdate] = useMutation(handleUpdateFlashcard);
 
   const clearInputs = () => {
     frontInputRef.current.value = '';
@@ -80,11 +122,6 @@ function Flashcards(props) {
   const onSelectingDeck = (deckId) => {
     setDeckId(deckId);
     clearInputs();
-  };
-
-  const onAddingFlashcard = () => {
-    clearInputs();
-    props.addFlashcard({ ...values, user_deck_id: deckId }, refetch);
   };
 
   return (
@@ -135,10 +172,7 @@ function Flashcards(props) {
                   onChange={onInputChange}
                 />
               </div>
-              <button
-                className='Flashcards__new--cta'
-                onClick={onAddingFlashcard}
-              >
+              <button className='Flashcards__new--cta' onClick={mutateAdd}>
                 <i className='fas fa-plus' />
               </button>
             </div>
@@ -154,8 +188,8 @@ function Flashcards(props) {
                 front={flashcard.front}
                 back={flashcard.back}
                 flashcard={flashcard}
-                updateCard={updateFlashcard}
-                deleteCard={mutate}
+                updateCard={mudateUpdate}
+                deleteCard={mutateDelete}
               />
             );
           })}
@@ -170,7 +204,5 @@ const mapStateToProps = ({ Decks }) => ({
 
 export default connect(mapStateToProps, {
   fetchUserDecks,
-  updateFlashcard,
-  addFlashcard,
   showToaster,
 })(Flashcards);

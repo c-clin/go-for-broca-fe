@@ -1,6 +1,4 @@
 import {
-  ADD_FLASHCARD_SUCCESS,
-  ADD_FLASHCARD_ERROR,
   GET_LEARN_FLASHCARD_SUCCESS,
   GET_LEARN_FLASHCARD_ERROR,
   GET_REVIEW_FLASHCARD_SUCCESS,
@@ -30,15 +28,6 @@ const initState = {
 
 export default function (state = initState, action) {
   switch (action.type) {
-    case ADD_FLASHCARD_SUCCESS:
-      // let flashcards = [...state.flashcards];
-      // flashcards.push(action.payload);
-
-      return {
-        ...state,
-        // flashcards,
-      };
-
     case GET_LEARN_FLASHCARD_SUCCESS:
       return {
         ...state,

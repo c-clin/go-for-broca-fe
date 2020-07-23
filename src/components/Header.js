@@ -29,6 +29,10 @@ class Header extends Component {
   };
 
   render() {
+    const pathname = window.location.pathname;
+
+    console.log(pathname);
+
     const authLinks = [
       { url: '/', title: 'GoForBroca', logo: true },
       {
@@ -111,6 +115,7 @@ class Header extends Component {
                     key={i}
                     className={classnames('Header__nav--list-item', {
                       logo: link.logo,
+                      active: pathname == link.url,
                     })}
                   >
                     <Link to={link.url}>{link.title}</Link>

@@ -22,6 +22,12 @@
       align-items: center;
       color: #fff;
 
+      &.active {
+        a {
+          color: $green1;
+        }
+      }
+
       &:hover {
         color: $green1;
       }
